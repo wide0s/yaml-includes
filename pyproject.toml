@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "yaml-include"
+version = "0.1.0"  # VERSION_ANCHOR
+description = "A simple library for adding include directives to a YAML file."
+authors = ["Vladimir Sergeev <vladimir.sergeev@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+packages = [{include = "yaml_includes"}]
+homepage = "https://github.com/wide0s/yaml-include"
+repository = "https://github.com/wide0s/yaml-include"
+
+[tool.poetry.dependencies]
+python = ">=3.9"
+
+[tool.poetry.group.dev.dependencies]
+mypy = "^1.0.0"
+pytest = "^8.0.0"
+pytest-cov = "^5.0.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 100
