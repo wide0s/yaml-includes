@@ -35,7 +35,7 @@ def load_text(
 
         import yaml
 
-        from yaml_include import include_yaml
+        from yaml_include import load_text
 
         document = yaml.safe_load(load_text('config.yaml'))
     """
