@@ -62,7 +62,7 @@ Loads a YAML file and resolves all `#!include` directives recursively.
 
 ```python
 import yaml
-from yaml_include import load_text
+from yaml_includes import load_text
 
 document = yaml.safe_load(load_text("config.yaml"))
 ```

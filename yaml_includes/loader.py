@@ -23,7 +23,7 @@ def load_text(
         Pass ``None`` (the default) on the initial call; the set is populated
         automatically during recursion.
     :returns: The fully-resolved YAML source as a single string.
-    :raises IncludedFileNotFound: If a file referenced by ``#!include`` does
+    :raises IncludeNotFound: If a file referenced by ``#!include`` does
         not exist on the filesystem.
     :raises CyclicInclude: If a chain of includes forms a cycle.
 
@@ -35,7 +35,7 @@ def load_text(
 
         import yaml
 
-        from yaml_include import load_text
+        from yaml_includes import load_text
 
         document = yaml.safe_load(load_text('config.yaml'))
     """
