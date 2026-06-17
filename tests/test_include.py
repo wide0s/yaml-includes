@@ -1,6 +1,6 @@
 import pytest
 
-from yaml_includes import (CyclicInclude, IncludeNotFound, load_text)
+from yaml_includes import (CyclicInclude, IncludeNotFound, load_text, resolve_includes)
 
 
 def test_no_includes(tmp_path):
@@ -80,3 +80,45 @@ def test_cyclic_include_indirect(tmp_path):
 
     with pytest.raises(CyclicInclude):
         load_text(a)
+
+
+def test_same_file_can_be_included_multiple_times(tmp_path):
+    common = tmp_path / "common.yaml"
+    common.write_text("value: 1\n")
+
+    a = tmp_path / "a.yaml"
+    a.write_text("#!include common.yaml\n")
+
+    b = tmp_path / "b.yaml"
+    b.write_text("#!include common.yaml\n")
+
+    main = tmp_path / "main.yaml"
+    main.write_text(
+        "#!include a.yaml\n"
+        "#!include b.yaml\n"
+    )
+
+    assert load_text(main) == (
+        "value: 1\n"
+        "value: 1"
+    )
+
+
+def test_resolve_includes_from_text(tmp_path):
+    fragment = tmp_path / "fragment.yaml"
+    fragment.write_text("b: 2\n")
+
+    text = (
+        "a: 1\n"
+        "#!include fragment.yaml\n"
+        "c: 3\n"
+    )
+
+    assert resolve_includes(
+        text=text,
+        base_dir=tmp_path,
+    ) == (
+        "a: 1\n"
+        "b: 2\n"
+        "c: 3"
+    )
