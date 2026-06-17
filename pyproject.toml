@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "yaml-includes"
-version = "0.1.2"  # VERSION_ANCHOR
+version = "0.1.3"  # VERSION_ANCHOR
 description = "A simple library for adding include directives to a YAML file."
 authors = ["Vladimir Sergeev <vladimir.sergeev@gmail.com>"]
 license = "MIT"
